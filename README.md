@@ -8,16 +8,18 @@
 git clone ~~~
 ```
 
-**2. 環境変数ファイルの作成**
+**2. パッケージインストール**
 
-```
-cp .env.example .env
-```
-
-**3. パッケージインストール**
+clone したディレクトリへ移動
 
 ```
 npm install
+```
+
+**3. 環境変数ファイルの作成**
+
+```
+cp .env.example .env
 ```
 
 **4. 起動**
@@ -28,27 +30,91 @@ npm run dev
 
 ## 開発フロー
 
-### 1. Issue の作成
+### 作業始めからpushまで
 
-1. Issue Template を元に Issue を作成してください。
-2. Assignees で誰が担当しているのかを選択してください。
-3. Projects で GitHub Projects のタスク管理と紐付けを行なってください。
-4. Issue を必ずミーティングで、いつ対応するのかをチームで決めます。
+```mermaid
+stateDiagram-v2
+  direction LR
+  classDef hidden display: none;
 
-*`備考`*
-- バグや表示崩れについては、Bug report で作成してください。
-  - 実装途中にバグを発見した際は作成してください。
-  - 必要であれば、ミーティングで修正対応について議論いたします。
+  S1: mainブランチに<br>切り替えて最新化する<br>*$ git checkout main*<br>*$ git pull*
+  S2: mainブランチから<br>作業ブランチを作成して<br>切り替える<br>*$ git checkout -b ブランチ名*
+  S3: npm installをかける<br>*$ npm install*
+  S4: 作業する
+  [*] --> S1
+  S1 --> S2
+  S2 --> S3
+  S3 --> S4
+  S4 --> INTERLUDE1:::hidden
 
-### 2. Branch
+  S5: lint、formatをかける<br>*$ npm run lint*<br>*$ npm run format*
+  S6: 実行して動かしてみる<br>*$ npm run dev*
+  S7: 修正したファイルをaddしてcommitする<br>*$ git add ファイル名*<br>*$ git commit -m "メッセージ"*
+  S8: 作業ブランチをpushする<br>*$ git push --set-upstream origin ブランチ名*
+  INTERLUDE2:::hidden --> S5
+  S5 --> S6
+  S6 --> S7
+  S7 --> S8
+  S8 --> [*]
+```
 
-#### ブランチ命名規則（**プレフィックス**をつける）
+### Pull Requestを出すときの注意点
 
-- fe: フロントエンド
-- be: バックエンド
+* 自分が作業したところのみが差分として検出されていることを確認する
+* descriptionの頭に"close #○○"（○○はissueの番号）を入れる
+  * これがあるとPull Requestをマージしたときそのissueが自動でcloseされて便利
+* ReviewersにPMを指定する
+* Assigneesに作業者自身とReviewersを指定する
+* Pull Requestを出したらSlack上でReviewersにレビュー依頼を出す
+  * メールも来るがSlackの方が気づきやすいので
+* レビュー依頼のSlackにはPull Request URLも含める
+  * 該当のPull Requestがすぐ分かる 
 
-- feature: 機能追加
-- fix: コード修正（リファクタリング等）
+## 開発 Tips
+
+### Issue
+
+- Issue にてタスクや問題を書いてください。
+- IssueTemplate を使ってください。（該当のテンプレートがない場合は作成してください）
+- 重複があると煩雑になるので、関連 Issue を探して#〇〇と参照を入れてください。
+- assign、tag をつけてください。
+- バグや表示崩れについては、Issue テンプレート`Bug report`で作成してください。
+  - 機能実装やテストで見つけ次第、どんどん作成してください。
+  - 必要であれば、MTG 内で修正対応について議論してください。
+- 作成した Issue を必ず MTG で、いつ対応するのかをチームで決めましょう。
+
+### PullRequest
+
+**1. プルリクエスト前の作業**
+
+プルリクエストを上げる前に必ず、自分が作業を行なっているブランチで `git pull origin main` を行うこと。<br/>
+もし、コンフリクトが発生したら、ローカル上で解決する、解決の仕方がわからない場合は、メンバーに相談すること。
+
+**2. `git pull origin main` を行なった後の作業**
+
+remote に変更があった場合は、 `git pull origin main` のコマンドを実行し、remote の変更を取り込む。<br/>
+package に更新がないか、確認するため、 `npm install` コマンドを実行する。<br/>
+`found 0 vulnerabilities` と表示されれば OK。
+
+**3. プルリクエスト作成時**
+
+- `PullRequestTemplate`を使ってください。
+- 作ったブランチから main ブランチへマージするプルリクを作ってください。
+- プルリクに issue 番号を紐付けてください。
+- レビュアーに assign つけてください。（複数つけても OK）
+- レビュー依頼の際は、PR 内にメンションコメント＆念の為 Slack にてレビュアーに声掛けお願いします。
+
+**4. マージ**
+
+- マージはスカッシュコミット（プルリク内のコミットを 1 つににまとめてコミット）でお願いします。
+  - マージの際に`Marge Pull Request`ではなく`Squash and merge`を選んでマージしてください。
+
+### Branch
+
+### ブランチ命名規則（**プレフィックス**をつける）
+
+- feature: 機能追加（基本これだけでよい）
+- fix: コード修正
 - bug: バグ修正
 
 ※ 該当項目がない場合は適宜追加
@@ -56,14 +122,14 @@ npm run dev
 **＜例＞**
 
 ```
-git checkout -b 'fe/feature/todotop_layout'
-git checkout -b 'fe/fix/todotop_layout'
-git checkout -b 'fe/bug/todotop_layout'
+git checkout -b 'feature/todotop_layout'
+git checkout -b 'fix/todotop_layout'
+git checkout -b 'bug/todotop_layout'
 ```
 
-### 3. Commit
+### Commit
 
-#### コミットメッセージ
+### コミットメッセージ
 
 - 日本語もしくは英語で端的に
 
@@ -73,31 +139,6 @@ git checkout -b 'fe/bug/todotop_layout'
 git commit -m 'Top画面 作成'
 git commit -m 'create top layout'
 ```
-
-### 4. PullRequest
-
-**1. プルリクエスト前の作業**
-
-プルリクエストを上げる前に必ず、自分が作業を行なっているブランチで `git pull origin main` を行うこと。<br/>
-もし、コンフリクトが発生したら、ローカル上で解決する、解決の仕方がわからない場合は、メンバーに相談する。
-
-**2. `git pull origin main` を行なった後の作業**
-
-package に更新がないか、確認するため、 `npm install` コマンドを実行する。<br/>
-`found 0 vulnerabilities` と表示されれば OK。
-
-**3. プルリクエスト作成時**
-
-- `PullRequestTemplate`を使ってください。
-- 作ったブランチから main ブランチへマージするプルリクを作ってください。
-- プルリクに issue 番号を紐付けてください。
-- レビュアーに Assignees つけてください。
-- レビュー依頼の際は、PR 内にメンションコメント＆Slack にてレビュアーに声掛けお願いします。
-
-**4. マージ**
-
-- マージはスカッシュコミット（プルリク内のコミットを 1 つににまとめてコミット）でお願いします。
-  - マージの際に`Marge Pull Request`ではなく`Squash and merge`を選んでマージしてください。
 
 ## 使用技術
 
