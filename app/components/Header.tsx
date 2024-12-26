@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <>
       <header className="w-full bg-red-400 text-white text-xl p-4">
-        <div className="w-full max-w-screen-xl mx-auto flex justify-between items-center gap-4 px-4 md:px-10 lg:px-20">
+        <div className="w-full max-w-full flex justify-between items-center gap-4 px-2 md:px-10">
           <img
             className="w-36 h-[50px] sm:w-44 md:w-60 lg:w-72 max-w-full object-cover"
             src="https://placehold.jp/300x50.png"
