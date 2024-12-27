@@ -1,8 +1,4 @@
 import Image from "next/image";
-import searchPic from "../public/images/icon_search.svg";
-import blogPic from "../public/images/image_picture.png";
-import prevArrow from "../public/images/icon_prevArrow.svg";
-import nextArrow from "../public/images/icon_nextArrow.svg";
 
 export default function Home() {
   return (
@@ -10,20 +6,21 @@ export default function Home() {
       <div className="flex items-center justify-center mb-16">
         <input type="text" placeholder="Search Blog Post" />
         <Image 
-        src={searchPic}
-        width={41}
-        height={39}
         alt="検索"
+          src="/images/icon_search.svg"
+          width={41}
+          height={39}
+          alt="検索"
         />
       </div>
       <div className="my-0 mx-auto w-9/12">
         <div className="flex mb-20">
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -40,10 +37,10 @@ export default function Home() {
           </div>
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -60,10 +57,10 @@ export default function Home() {
           </div>
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -82,10 +79,10 @@ export default function Home() {
         <div className="flex mb-20">
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -102,10 +99,10 @@ export default function Home() {
           </div>
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -122,10 +119,10 @@ export default function Home() {
           </div>
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -144,10 +141,10 @@ export default function Home() {
         <div className="flex">
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -164,10 +161,10 @@ export default function Home() {
           </div>
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -184,10 +181,10 @@ export default function Home() {
           </div>
           <div>
             <Image 
-            src={blogPic}
-            width={467}
-            height={304.51}
-            alt="仮 画像"
+              src="/images/image_picture.png"
+              width={467}
+              height={304.51}
+              alt="仮 画像"
             />
             <div className="flex">
               <p>Post Title</p>
@@ -207,10 +204,10 @@ export default function Home() {
       <div className="flex items-center justify-center mt-16">
         <div className="flex">
           <Image 
-          src={prevArrow}
-          width={20}
-          height={20}
-          alt="previous page"
+            src="/images/icon_prevArrow.svg"
+            width={20}
+            height={20}
+            alt="previous page"
           />
           <p>Previous Page</p>
         </div>
@@ -228,10 +225,10 @@ export default function Home() {
         </ul>
         <div className="flex">
           <Image 
-          src={nextArrow}
-          width={20}
-          height={20}
-          alt="next page"
+            src="/images/icon_nextArrow.svg"
+            width={20}
+            height={20}
+            alt="next page"
           />
           <p>Next Page</p>
         </div>
