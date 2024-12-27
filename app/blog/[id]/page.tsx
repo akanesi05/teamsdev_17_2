@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from "next/image";
-import '../globals.css';
+import { Pagenation } from '../../components/Pagenation';
+import { RoundButton } from '@/app/components/RoundButton';
 
 export default function BlogPage() {
   return (
@@ -13,7 +14,7 @@ export default function BlogPage() {
               <h1 className='p-blogCard__title text-4xl sm:text-5xl'>Blog Title</h1>
               <span className="p-blogCard__icon">
                 <Image
-                  src="/icon-user.png" //配置した画像のパスを記述する。
+                  src="/images/icon-user.png" //配置した画像のパスを記述する。
                   alt="blog Image"
                   width={96}
                   height={94}
@@ -24,7 +25,7 @@ export default function BlogPage() {
             <div className="p-blogCard__img mb-8 sm:mb-12">
               {/* <img src="/_next/static/img/blog/detail/sample-image.png" alt="sample image" /> */}
               <Image
-                src="/blog-sample1.png" //配置した画像のパスを記述する。
+                src="/images/blog-sample1.png" //配置した画像のパスを記述する。
                 alt="blog Image"
                 width={2395}
                 height={1237}
@@ -46,7 +47,7 @@ export default function BlogPage() {
               <li>
                 <a href="">
                   <Image
-                    src="/blog-sample2.png"
+                    src="/images/blog-sample2.png"
                     alt="blog sample2"
                     width={333}
                     height={166}
@@ -58,7 +59,7 @@ export default function BlogPage() {
               <li>
                 <a href="">
                   <Image
-                    src="/blog-sample2.png"
+                    src="/images/blog-sample2.png"
                     alt="blog sample2"
                     width={333}
                     height={166}
@@ -70,7 +71,7 @@ export default function BlogPage() {
               <li>
                 <a href="">
                   <Image
-                    src="/blog-sample2.png"
+                    src="/images/blog-sample2.png"
                     alt="blog sample2"
                     width={333}
                     height={166}
@@ -92,7 +93,7 @@ export default function BlogPage() {
               <li className='c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7'>
                 <div className="c-userComment__head text-center">
                   <Image
-                    src="/icon-user.png" //配置した画像のパスを記述する。
+                    src="/images/icon-user.png" //配置した画像のパスを記述する。
                     alt="blog Image"
                     width={64}
                     height={64}
@@ -108,7 +109,7 @@ export default function BlogPage() {
               <li className='c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7'>
                 <div className="c-userComment__head text-center">
                   <Image
-                    src="/icon-user.png" //配置した画像のパスを記述する。
+                    src="/images/icon-user.png" //配置した画像のパスを記述する。
                     alt="blog Image"
                     width={64}
                     height={64}
@@ -125,47 +126,10 @@ export default function BlogPage() {
           </div>
           {/* button components */}
           <br/>
-          <button className='bg-[#383838] rounded-[50px] w-[200px] h-[60px] flex justify-center gap-3 items-center text-white'>
-            <Image
-              src="/icon-create.png" //配置した画像のパスを記述する。
-              alt="icon"
-              width={25}
-              height={25}
-              className="w-6"
-            />
-            <span>ボタン</span>
-          </button>
+          <RoundButton />
           <br/>
-          {/* pagenation */}
-          <ul className='flex justify-center items-center gap-4 mx-4'>
-            <li className='pre font-bold mr-9'>
-              <a className='flex justify-between items-center w-full' href="">
-                <Image
-                  src="/icon-left.png"
-                  alt="arrow"
-                  width={20}
-                  height={20}
-                  className="w-5 sm:w-5 mr-3"
-                />
-                {/* <span>Previous Page</span> */}
-              </a>
-            </li>
-            <li className='current text-white text-base rounded-full border border-solid border-[#000] bg-black flex justify-center items-center w-10 h-10'>1</li>
-            <li className='text-black text-base rounded-full border border-solid border-[#000] bg-white'><a className='flex justify-center items-center w-10 h-10' href="">2</a></li>
-            <li className='text-black text-base rounded-full border border-solid border-[#000] bg-white'><a className='flex justify-center items-center w-10 h-10' href="">3</a></li>
-            <li className='next font-bold ml-9'>
-              <a className='flex justify-between items-center w-full' href="">
-                {/* <span>Next Page</span> */}
-                <Image
-                  src="/icon-right.png"
-                  alt="arrow"
-                  width={20}
-                  height={20}
-                  className="w-5 sm:w-5 ml-3"
-                />
-              </a>
-            </li>
-          </ul>
+          {/* pagenation components */}
+          <Pagenation />
         </div>
       </div>
     </>
