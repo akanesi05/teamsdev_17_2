@@ -6,7 +6,6 @@ export default function Home() {
       <div className="flex items-center justify-center mb-16">
         <input type="text" placeholder="Search Blog Post" />
         <Image 
-        alt="検索"
           src="/images/icon_search.svg"
           width={41}
           height={39}
