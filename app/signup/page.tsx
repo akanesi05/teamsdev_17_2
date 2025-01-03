@@ -2,6 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import Link from "next/link";
 import { css } from "@emotion/react";
+import { signup } from './actions';
 
 const content = css`
   width: 100%;
@@ -128,13 +129,13 @@ const SignUp = () => {
           </div>
           <div css={signUp_item}>
             <label css={signUp_title} htmlFor="email">Email</label>
-            <input css={signUp_input} id="email" type="email" placeholder="Enter your Email" />
+            <input css={signUp_input} id="email" type="email" placeholder="Enter your Email" required/>
           </div>
           <div css={signUp_lastItem}>
             <label css={signUp_title} htmlFor="password">Password</label>
-            <input css={signUp_input} id="password" type="password" placeholder="Enter your Password" />
+            <input css={signUp_input} id="password" type="password" placeholder="Enter your Password" required/>
           </div>
-          <button css={signUp_btn}>Sign Up</button>
+          <button css={signUp_btn} formAction={signup}>Sign Up</button>
           <p css={signIn_text}>
             Already have an account ?&nbsp;
             <Link css={signIn_link} href="/signin">Sign in</Link>
