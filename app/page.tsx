@@ -1,6 +1,21 @@
 import Image from "next/image";
+import { createClient } from '@supabase/supabase-js';
 
-export default function Home() {
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+export default async function Home() {
+  const { data, error } = await supabase
+  .from('posts')
+  .select();
+
+if (error) {
+  console.error(error);
+  return <div>Error fetching data</div>;
+}
+
   return (
     <div className="py-16">
       <div className="flex items-center justify-center mb-16">
