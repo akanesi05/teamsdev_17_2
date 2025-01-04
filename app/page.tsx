@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import { supabase } from "../utils/supabase";
 import { useState, useEffect } from "react";
@@ -28,21 +28,16 @@ export default function Home() {
     } else {
       await fetchPosts();
     }
-  }
+  };
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
     search(e.target.value);
-  }
+  };
   return (
     <div className="py-16">
       <div className="flex items-center justify-center mb-16">
-        <input 
-          type="text"
-          value={keyword}
-          placeholder="Search Blog Post"
-          onChange={(e) => handleChange(e)}
-        />
+        <input type="text" value={keyword} placeholder="Search Blog Post" onChange={(e) => handleChange(e)} />
         <Image src="/images/icon_search.svg" width={41} height={39} alt="検索" />
       </div>
       <div className="my-0 mx-auto w-9/12">
