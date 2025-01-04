@@ -21,7 +21,7 @@ export default function Home() {
       const { data: posts, error } = await supabase
         .from("posts")
         .select()
-        .or("title.like.%${value}%, content.like.%${value}%");
+        .or(`title.like.%${value}%, content.like.%${value}%`);
       if (error) throw error;
       setPosts(posts);
       return;
@@ -49,7 +49,7 @@ export default function Home() {
         <div className="flex mb-20">
           {posts.map((post: any) => (
             <div key={post.id}>
-              <Image src={post.image_path} width={467} height={304.51} alt="仮 画像" />
+              <Image src="/images/image_picture.png" width={467} height={304.51} alt="仮 画像" />
               <div className="flex">
                 <p>{post.title}</p>
                 <p>
