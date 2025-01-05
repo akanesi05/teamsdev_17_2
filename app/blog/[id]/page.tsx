@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Pagenation } from "../../components/Pagenation";
 import { RoundButton } from "@/app/components/RoundButton";
@@ -15,13 +15,15 @@ type PageProps = {
 }
 
 const BlogPage = ({ params }: PageProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [ post, setPost ] = useState<any>("");
 
   useEffect(() => {
     fetchPost();
   }, []);
 
-
   async function fetchPost() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data: post } = await supabase
     .from('posts')
     .select('*')
