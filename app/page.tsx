@@ -44,12 +44,7 @@ export default function Home() {
         <div className="flex mb-20">
           {posts.map((post: any) => (
             <div key={post.id}>
-              <Image
-                src={post.image_path ? post.image_path : "/images/image_picture.png"}
-                width={467}
-                height={304.51}
-                alt="仮 画像"
-              />
+              <Image src={post.image_path || "/images/image_picture.png"} width={467} height={304.51} alt="仮 画像" />
               <div className="flex">
                 <p>{post.title}</p>
                 <p>
