@@ -1,13 +1,18 @@
+"use client";
 import Image from "next/image";
 import { createClient } from '@supabase/supabase-js';
+import { useEffect,useState} from 'react';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export default async function Home() {
-  const { data, error } = await supabase
+ export default async function Home() {
+  const [posts, setPosts] = useState([]); 
+  useEffect(() => {
+  const fetchData = async ()=>
+  {const { data, error } = await supabase
   .from('posts')
   .select();
 
@@ -15,7 +20,7 @@ if (error) {
   console.error(error);
   return <div>Error fetching data</div>;
 }
-
+}});
   return (
     <div className="py-16">
       <div className="flex items-center justify-center mb-16">
@@ -227,6 +232,8 @@ if (error) {
           <li>9</li>
           <li>10</li>
         </ul>
+        <div>
+    </div>
         <div className="flex">
           <Image src="/images/icon_nextArrow.svg" width={20} height={20} alt="next page" />
           <p>Next Page</p>
