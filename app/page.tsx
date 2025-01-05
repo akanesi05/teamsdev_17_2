@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { supabase } from "../utils/supabase";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [posts, setPosts] = useState<any>([]);
@@ -63,6 +64,7 @@ export default function Home() {
                 <p>a min ago</p>
               </div>
               <p>{post.content}</p>
+              <Link href={`/blog/${post.id}`}>詳細</Link>
             </div>
           ))}
         </div>
