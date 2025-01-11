@@ -35,7 +35,8 @@ export default function Home() {
     search(e.target.value);
   };
   return (
-    <div className="py-16">
+    <>
+        <div className="py-16">
       <div className="flex items-center justify-center mb-16">
         <input type="text" value={keyword} placeholder="Search Blog Post" onChange={(e) => handleChange(e)} />
         <Image src="/images/icon_search.svg" width={41} height={39} alt="検索" />
@@ -85,5 +86,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -1,14 +1,11 @@
-import type { Metadata } from "next";
+'use client';
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "techblog",
-  description: "エンジニア向けブログ",
-};
 
 export default function RootLayout({
   children,
@@ -17,6 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        <title>techblog</title>
+        <meta name="description" content="エンジニア向けブログ"></meta>
+      </head>
       <body className={inter.className}>
         <Header />
         {children}
