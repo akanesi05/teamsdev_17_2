@@ -120,11 +120,21 @@ const signIn_text = css`
   text-decoration-skip-ink: none;
 `;
 
+const fontRed = css`
+  color: red;
+`;
+
 const SignUp = () => {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isErrorName, setIsErrorName] = useState<boolean>(false);
+  const [isErrorEmail, setIsErrorEmail] = useState<boolean>(false);
+  const [isErrorPassword, setIsErrorPassword] = useState<boolean>(false);
+  const [errorMessageName, setErrorMessageName] = useState<string>("");
+  const [errorMessageEmail, setErrorMessageEmail] = useState<string>("");
+  const [errorMessagePassword, setErrorMessagePassword] = useState<string>("");
 
   const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
@@ -143,6 +153,36 @@ const SignUp = () => {
     }
   };
 
+  const onChangeNameText = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (name.length >= 20) {
+      setIsErrorName(true)
+      setErrorMessageName("名前は20文字以内で入力してください")
+    } else {
+      setIsErrorName(false)
+    }
+    setName(event.target.value);
+  }
+
+  const onChangeEmailText = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (email.length >= 20) {
+      setIsErrorEmail(true)
+      setErrorMessageEmail("正しい書式で入力してください")
+    } else {
+      setIsErrorEmail(false)
+    }
+    setEmail(event.target.value);
+  }
+
+  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (password.length >= 20) {
+      setIsErrorPassword(true)
+      setErrorMessagePassword("名前は20文字以内で入力してください")
+    } else {
+      setIsErrorPassword(false)
+    }
+    setPassword(event.target.value);
+  }
+
   return (
     <div css={content}>
       <div css={inner}>
@@ -158,9 +198,10 @@ const SignUp = () => {
               type="name"
               placeholder="Enter your name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={onChangeNameText}
               required
             />
+            {isErrorName && <p css={fontRed}>{errorMessageName}</p> }
           </div>
           <div css={signUp_item}>
             <label css={signUp_title} htmlFor="email">
@@ -172,9 +213,10 @@ const SignUp = () => {
               type="email"
               value={email}
               placeholder="Enter your Email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={onChangeEmailText}
               required
             />
+            {isErrorEmail && <p css={fontRed}>{errorMessageEmail}</p> }
           </div>
           <div css={signUp_lastItem}>
             <label css={signUp_title} htmlFor="password">
@@ -186,9 +228,10 @@ const SignUp = () => {
               type="password"
               value={password}
               placeholder="Enter your Password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={onChangePassword}
               required
             />
+            {isErrorPassword && <p css={fontRed}>{errorMessagePassword}</p> }
           </div>
           <button css={signUp_btn} type="submit">
             Sign Up
