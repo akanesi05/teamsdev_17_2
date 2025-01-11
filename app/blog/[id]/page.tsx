@@ -16,7 +16,7 @@ type PageProps = {
 
 type Comments = {
   id: string;
-  comment: string;
+  content: string;
 }
 
 const BlogPage = ({ params }: PageProps) => {
