@@ -11,6 +11,7 @@ type PageProps = {
     title: string;
     content: string;
     image_path: string;
+    user_id: string;
   }
 }
 
@@ -39,10 +40,13 @@ const BlogPage = ({ params }: PageProps) => {
   const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comment === "") return;
+
     await supabase.from("comments").insert({ 
       "content": comment,
       "post_id": params.id,
+      "user_id": params.user_id,
     });
+    setComment("");
   }
 
   return (
