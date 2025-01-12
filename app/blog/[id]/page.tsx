@@ -30,10 +30,10 @@ const BlogPage = ({ params }: PageProps) => {
 
   async function fetchComments() {
     const { data } = await supabase
-    .from("comments")
-    .select("*")
-    .eq("post_id", params.id)
-    .order("created_at", { ascending: false } );
+      .from("comments")
+      .select("*")
+      .eq("post_id", params.id)
+      .order("created_at", { ascending: false });
     setComments(data);
   }
 
@@ -144,7 +144,10 @@ const BlogPage = ({ params }: PageProps) => {
             <ul className="p-comments__post">
               {comments.map((comment) => (
                 <>
-                  <li key={comment.id} className="c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7">
+                  <li
+                    key={comment.id}
+                    className="c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7"
+                  >
                     <div className="c-userComment__head text-center">
                       <Image
                         src="/images/icon-user.png" //配置した画像のパスを記述する。
