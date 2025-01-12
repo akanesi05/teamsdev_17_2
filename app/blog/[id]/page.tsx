@@ -21,17 +21,19 @@ type Comments = {
 };
 
 const BlogPage = ({ params }: PageProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [comment, setComment] = useState<string>("");
   const [comments, setComments] = useState<Comments[]>([]);
 
   useEffect(() => {
     fetchComments();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fetchComments() {
-    const { data } = await supabase.from("comments").select("*").eq("post_id", params.id);
+    const { data } = await supabase
+    .from("comments")
+    .select("*")
+    .eq("post_id", params.id)
+    .order("created_at", { ascending: false } );
     setComments(data);
   }
 
@@ -41,6 +43,7 @@ const BlogPage = ({ params }: PageProps) => {
 
     const { data } = await supabase.from("comments").select("*").eq("post_id", params.id);
 
+    // TODO [サインイン機能追加後user_idの取得方法を変更する必要があります]
     await supabase.from("comments").insert({
       content: comment,
       post_id: params.id,
@@ -139,9 +142,9 @@ const BlogPage = ({ params }: PageProps) => {
               <button className="InputArea__button w-full text-white rounded-md bg-[#18A0FB]">Comment</button>
             </form>
             <ul className="p-comments__post">
-              {comments.map((comment: any) => (
+              {comments.map((comment) => (
                 <>
-                  <li className="c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7">
+                  <li key={comment.id} className="c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7">
                     <div className="c-userComment__head text-center">
                       <Image
                         src="/images/icon-user.png" //配置した画像のパスを記述する。
