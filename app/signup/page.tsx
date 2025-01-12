@@ -61,7 +61,8 @@ const SignUp = () => {
   };
 
   const onChangeEmailText = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (email.length >= 20) {
+    const emailStyle = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
+    if (!emailStyle.test(email)) {
       setIsErrorEmail(true);
       setErrorMessageEmail("正しい書式で入力してください");
     } else {
