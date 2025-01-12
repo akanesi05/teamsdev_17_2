@@ -41,6 +41,7 @@ const SignUp = () => {
     const { error } = await supabase.auth.signUp(data);
     if (error) {
       redirectRequested = false;
+      throw error;
     } else {
       redirectRequested = true;
     }
