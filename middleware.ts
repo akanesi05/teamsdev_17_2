@@ -1,6 +1,10 @@
 import { type NextRequest } from "next/server";
 import { updateSession } from "./utils/supabase/middleware";
 
+/**
+ * サーバー コンポーネントは Cookie を書き込むことができないため、
+ * 期限切れの認証トークンを更新して保存するためのミドルウェアファイルです
+ */
 export async function middleware(request: NextRequest) {
   return await updateSession(request);
 }

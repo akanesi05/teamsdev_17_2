@@ -19,7 +19,7 @@ import {
   signUp__btn,
   signIn__text,
   signIn__link,
-} from "../../public/styles/signup/style";
+} from "./style";
 
 const SignUp = () => {
   const router = useRouter();

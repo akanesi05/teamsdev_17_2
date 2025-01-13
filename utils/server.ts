@@ -1,6 +1,10 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
+/**
+ * サーバー上でのみ実行されるサーバーコンポーネント・サーバーアクション・ルートハンドラーから
+ * Supabase にアクセスするために作成
+ */
 export async function createClient() {
   const cookieStore = await cookies();
 

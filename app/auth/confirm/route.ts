@@ -4,6 +4,10 @@ import { type NextRequest } from "next/server";
 import { createClient } from "../../../utils/server";
 import { redirect } from "next/navigation";
 
+/**
+ * 認証確認用のルートハンドラー
+ * ユーザーが確認メールのリンクをクリックすると、セキュアコードを Authトークンと交換します
+ */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const token_hash = searchParams.get("token_hash");

@@ -1,6 +1,10 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+/**
+ * 更新された認証トークンをサーバーコンポーネントに渡して、サーバーコンポーネントが同じトークンを更新しないようにし、
+ * 更新された Authトークンをブラウザに渡して、古いトークンを置き換えています。
+ */
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
