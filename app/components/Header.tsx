@@ -11,11 +11,11 @@ const Header = () => {
             alt="ロゴ画像"
           />
           <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-10 items-center justify-center">
-          <Link href="/">
-          <button>Home</button>
-          </Link>
+            <Link href="/">
+              <button>Home</button>
+            </Link>
             <Link href="/create">
-            <button>Create</button>
+              <button>Create</button>
             </Link>
             <Link href="/signin">
               <button>Signin</button>
