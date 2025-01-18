@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useRouter } from "next/navigation"; // App Routerでは 'next/navigation' を使用
 import { supabase } from "../../utils/supabase";
 import "../globals.css";
 import { validateEmail } from "@/utils/validators";
@@ -11,6 +12,8 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const router = useRouter(); // ここでルーターを取得
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -55,7 +58,7 @@ const SignIn = () => {
     if (error) {
       setErrorMessage("サインインに失敗しました");
     } else {
-      window.location.href = "/";
+      router.push("/"); // ルーティングをクライアントサイドで処理
     }
   };
 
