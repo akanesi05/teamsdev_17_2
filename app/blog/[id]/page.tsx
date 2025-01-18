@@ -143,26 +143,25 @@ const BlogPage = ({ params }: PageProps) => {
             </form>
             <ul className="p-comments__post">
               {comments.map((comment) => (
-
-                  <li
-                    key={comment.id}
-                    className="c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7"
-                  >
-                    <div className="c-userComment__head text-center">
-                      <Image
-                        src="/images/icon-user.png" //配置した画像のパスを記述する。
-                        alt="blog Image"
-                        width={64}
-                        height={64}
-                        className="mb-2"
-                      />
-                      <p>USER</p>
-                    </div>
-                    <div className="c-userComment__body">
-                      <p className="text-lg mb-4">{comment.content}</p>
-                      <p className="text-[#18A0FB80] text-lg">a min ago</p>
-                    </div>
-                  </li>
+                <li
+                  key={comment.id}
+                  className="c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7"
+                >
+                  <div className="c-userComment__head text-center">
+                    <Image
+                      src="/images/icon-user.png" //配置した画像のパスを記述する。
+                      alt="blog Image"
+                      width={64}
+                      height={64}
+                      className="mb-2"
+                    />
+                    <p>USER</p>
+                  </div>
+                  <div className="c-userComment__body">
+                    <p className="text-lg mb-4">{comment.content}</p>
+                    <p className="text-[#18A0FB80] text-lg">a min ago</p>
+                  </div>
+                </li>
               ))}
             </ul>
           </div>
