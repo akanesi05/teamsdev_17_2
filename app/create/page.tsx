@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { supabase } from "../../utils/supabase";
 
 // supabase 画像
-import { uploadStorage } from '../components/create/storage'
+import { uploadStorage } from "../components/create/storage";
 // import TitleInput from "../components/create/TitleInput";
 import CreateButton from "@/app/components/CreateButton";
 // import ImageUpload from "../components/create/ImageUpload";
@@ -32,14 +32,12 @@ const CreatePage = () => {
   // }
 
   // 画像アップロード
-  const handleImageChange = async (
-    event: ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
+  const handleImageChange = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     if (!event.target.files || event.target.files.length == 0) {
-      return
+      return;
     }
     uploadStorage(event.target.files[0]);
-  }
+  };
   // insert data
   // const handleSubmit = async () => {
   //   await supabase.from("posts").insert({ title: blogTitle });
@@ -53,30 +51,31 @@ const CreatePage = () => {
   //     }
   // };
 
-  const handleSubmit = async () => {
-    const { data, error } = await supabase
-      .from("test")
-      .insert({ id: 2, title: "bbb"})
-      .select();
-    if (error) {
-      throw error;
-    }
-    return data;
-  };
   // const handleSubmit = async (e: any) => {
   //   e.preventDefault();
-  //   if (blogTitle === "") return;
-  //   const { data, error } = await supabase.from('posts').insert([
-  //     { id: 1, title: 'aaa' },
-  //   ]);
-  //   await supabase
-  //     .from("posts")
-  //     .insert({
-  //       id: uuidv4(),
-  //       title: blogTitle,
-  //     });
-  //   setBlogTitle("");
+  //   const { data, error } = await supabase.from("test").insert({ id: 2, title: "bbb" });
+  //   if (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  //   console.log(data);
+  //   return data;
   // };
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (blogTitle === "") return;
+    // const { data, error } = await supabase.from('posts').insert([
+    //   { id: 1, title: 'aaa' },
+    // ]);
+    await supabase.from("posts").insert({
+      user_id: "0e4d4176-0660-4e5f-8ae1-48716ac124b5", // TODO ログイン中のユーザーIDを指定する
+      category_id: "c846a032-b069-4981-8e02-328fd7f9b9d5", // ここはこのままで良い（カテゴリ登録機能がないため）
+      title: blogTitle,
+      content: "CONTENT", // TODO 実際に入力された本文を指定する
+      image_path: "image/path.jpg", // TODO 事前にアップロードした画像のフルパスを指定する
+    });
+    setBlogTitle("");
+  };
   // const handleSubmit = async (e: any) => {
   //   e.preventDefault();
   //   const { error } = await supabase.from('posts').insert([
