@@ -47,7 +47,7 @@ const SignUp = () => {
     }
 
     if (redirectRequested) {
-      router.push("/");
+      router.push("/signin");
     }
   };
 
