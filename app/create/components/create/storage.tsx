@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { supabase } from "../../../utils/supabase";
+import { supabase } from "../../../../utils/supabase";
 
 export const uploadStorage = async(file:any): Promise<any> => {
   const pathName = `public/blogimage/${uuidv4()}.jpg`;
@@ -10,12 +10,7 @@ export const uploadStorage = async(file:any): Promise<any> => {
       upsert: false,
     });
   if (error) throw error;
-  return {
-    path: data?.path ?? null,
-  };
-  return supabase.storage.from('BlogImage').getPublicUrl(pathName).data.publicUrl;
-};
-
-export const addBlog = async (title: string) => {
-  await supabase.from("posts").insert({ title: title });
+  const insertTableImageUrl = `${data.path}`;
+  const publicURL = supabase.storage.from('BlogImage').getPublicUrl(insertTableImageUrl).data.publicUrl;
+  return publicURL;
 };
