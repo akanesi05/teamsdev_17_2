@@ -1,4 +1,3 @@
-
 const ImageUpload = (props: any) => {
   return (
     <div className="w-full h-[300px] border-dotted border-2 border-black rounded-3xl p-6 flex justify-center items-center mt-20">

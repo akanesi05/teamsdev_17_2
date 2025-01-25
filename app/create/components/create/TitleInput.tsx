@@ -3,10 +3,10 @@ import React from "react";
 type TProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
 const TitleInput = (props: TProps) => {
-  const {value , onChange} = props;
+  const { value, onChange } = props;
   return (
     <input
       type="text"

@@ -3,10 +3,10 @@ import React from "react";
 type TextProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-}
+};
 
 const TextArea = (props: TextProps) => {
-  const {value, onChange} = props;
+  const { value, onChange } = props;
   return (
     <div className="mt-20">
       <textarea
