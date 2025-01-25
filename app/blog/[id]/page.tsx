@@ -143,7 +143,6 @@ const BlogPage = ({ params }: PageProps) => {
             </form>
             <ul className="p-comments__post">
               {comments.map((comment) => (
-
                   <li
                     key={comment.id}
                     className="c-userComment bg-[#C4C4C44D] rounded-md p-5 grid gap-7 grid-cols-[64px,auto] mb-7"
