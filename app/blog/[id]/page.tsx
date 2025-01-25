@@ -41,13 +41,13 @@ const BlogPage = ({ params }: PageProps) => {
     e.preventDefault();
     if (comment === "") return;
 
-    const { data } = await supabase.from("comments").select("*").eq("post_id", params.id);
+    const { data: { user } } = await supabase.auth.getUser();
 
     // TODO [サインイン機能追加後user_idの取得方法を変更する必要があります]
     await supabase.from("comments").insert({
       content: comment,
       post_id: params.id,
-      user_id: data[0].user_id,
+      user_id: user?.id,
     });
     setComment("");
   };
