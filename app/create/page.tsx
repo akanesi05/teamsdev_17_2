@@ -32,7 +32,6 @@ const CreatePage = () => {
     await supabase.from("posts").insert({
       id: uuidv4(),
       user_id: userID,
-      // user_id: data.user?.id,
       category_id: "c846a032-b069-4981-8e02-328fd7f9b9d5", // ここはこのままで良い（カテゴリ登録機能がないため）
       title: blogTitle,
       content: blogContent,
