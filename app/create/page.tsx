@@ -25,11 +25,13 @@ const CreatePage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const imageUrl = await uploadStorage(blogImage);
+    const authUser = await supabase.auth.getUser();
+    const userID = authUser.data.user?.id;
+    if (!userID) return;
     if (blogTitle === "") return;
-    const { data } = await supabase.auth.getUser();
     await supabase.from("posts").insert({
       id: uuidv4(),
-      user_id: "0e4d4176-0660-4e5f-8ae1-48716ac124b5",
+      user_id: userID,
       // user_id: data.user?.id,
       category_id: "c846a032-b069-4981-8e02-328fd7f9b9d5", // ここはこのままで良い（カテゴリ登録機能がないため）
       title: blogTitle,
