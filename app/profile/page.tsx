@@ -19,7 +19,7 @@ const ProfilePage = () => {
     setUserId(userId);
   };
   async function fetchPosts() {
-    const { data } = await supabase.from("posts").select("*").eq("user_id", user.id);
+    const { data } = await supabase.from("posts").select("*").eq("user_id", user.Id);
     // TODO ユーザーID条件が必要
     setPosts(data);
   }
