@@ -15,18 +15,33 @@ type PageProps = {
   };
 };
 
+type Post = {
+  id: string;
+  title: string;
+  content: string;
+  image_path: string;
+  user_id: string;
+};
+
 type Comments = {
   id: string;
   content: string;
 };
 
 const BlogPage = ({ params }: PageProps) => {
+  const [post, setPost] = useState<Post | null>(null);
   const [comment, setComment] = useState<string>("");
   const [comments, setComments] = useState<Comments[]>([]);
 
   useEffect(() => {
     fetchComments();
+    fetchPost();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function fetchPost() {
+    const { data } = await supabase.from("posts").select("*").eq("id", params.id).single();
+    setPost(data);
+  }
 
   async function fetchComments() {
     const { data } = await supabase
@@ -58,28 +73,25 @@ const BlogPage = ({ params }: PageProps) => {
         <div className="l-inner mx-4 my-6 sm:w-10/12 sm:max-w-7xl sm:mx-auto sm:my-14">
           <div className="p-blogCard w-full rounded-3xl mb-12 sm:py-12 sm:px-16 sm:bg-[#D9D9D991]">
             <div className="p-blogCard-head flex justify-between items-center mb-8">
-              <h1 className="p-blogCard__title text-4xl sm:text-5xl">Blog Title</h1>
+              <h1 className="p-blogCard__title text-4xl sm:text-5xl">{post?.title}</h1>
               <span className="p-blogCard__icon">
                 <Image src="/images/icon-user.png" alt="blog Image" width={96} height={94} className="w-14 sm:w-24" />
               </span>
             </div>
             <div className="p-blogCard__img mb-8 sm:mb-12">
-              <Image
-                src="/images/blog-sample1.png" //配置した画像のパスを記述する。
-                alt="blog Image"
-                width={2395}
-                height={1237}
-                className="w-full"
-              />
+              {post?.image_path ? (
+                <Image
+                  src={post.image_path}
+                  alt={post.title || "Blog Image"}
+                  width={2395}
+                  height={1237}
+                  className="w-full"
+                />
+              ) : (
+                <p>画像はありません</p>
+              )}
             </div>
-            <p className="p-blogCard__text text-base leading-loose sm:text-xl">
-              ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト
-              <br />
-              <br />
-              ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト
-              <br />
-              ダミーテキストダミーテキストダミーテキストダミーテキスト
-            </p>
+            <p className="p-blogCard__text text-base leading-loose sm:text-xl">{post ? post.content : "Loading"}</p>
           </div>
           {/* more post */}
           <div className="p-morePost mb-12">
@@ -89,7 +101,7 @@ const BlogPage = ({ params }: PageProps) => {
               <li>
                 <a href="">
                   <Image
-                    src="/images/blog-sample1.png" //配置した画像のパスを記述する。
+                    src="/images/blog-sample1.png"
                     alt="blog Image"
                     width={2395}
                     height={1237}
