@@ -36,7 +36,7 @@ const BlogPage = ({ params }: PageProps) => {
   useEffect(() => {
     fetchComments();
     fetchPost();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function fetchPost() {
     const { data } = await supabase.from("posts").select("*").eq("id", params.id).single();
@@ -49,20 +49,20 @@ const BlogPage = ({ params }: PageProps) => {
       .select("*")
       .eq("post_id", params.id)
       .order("created_at", { ascending: false });
-    setComments(data);
+    setComments(data ?? []);
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (comment === "") return;
 
-    const { data } = await supabase.from("comments").select("*").eq("post_id", params.id);
-
-    // TODO [サインイン機能追加後user_idの取得方法を変更する必要があります]
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     await supabase.from("comments").insert({
       content: comment,
       post_id: params.id,
-      user_id: data[0].user_id,
+      user_id: user?.id,
     });
     setComment("");
   };
