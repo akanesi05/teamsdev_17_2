@@ -19,6 +19,7 @@ const CreatePage = () => {
     setBlogContent(e.target.value);
   };
   const handleInsertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
     setBlogImage(e.target.files[0]);
   };
 

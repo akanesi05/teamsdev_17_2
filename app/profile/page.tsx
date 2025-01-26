@@ -1,27 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabase";
 import Link from "next/link";
 import Image from "next/image";
 
 const ProfilePage = () => {
-  const [posts, setPosts] = useState<any>([]);
-  const [userId, setUserId] = useState<string>("");
+  const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
     fetchPosts();
-    fetchUser();
   }, []);
 
-  const fetchUser = async () => {
-    const data = await supabase.auth.getUser();
-    const userId = data.data.user?.id ?? "";
-    setUserId(userId);
-  };
   async function fetchPosts() {
-    const { data } = await supabase.from("posts").select("*").eq("user_id", user.Id);
-    // TODO ユーザーID条件が必要
-    setPosts(data);
+    const userData = await supabase.auth.getUser();
+    const userId = userData.data.user?.id ?? "";
+    const { data } = await supabase.from("posts").select("*").eq("user_id", userId);
+    setPosts(data ?? []);
   }
   return (
     <div className="container mx-auto pb-96">
