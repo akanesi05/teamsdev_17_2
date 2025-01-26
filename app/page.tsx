@@ -45,7 +45,6 @@ export default function Home() {
         <div className="my-0 mx-auto w-9/12">
           <div className="flex mb-20">
             {posts.map((post: any) => (
-              <>
               <div key={post.id}>
                 <Image src={post.image_path || "/images/image_picture.png"} width={467} height={304.51} alt="仮 画像" />
                 <div className="flex">
@@ -63,15 +62,6 @@ export default function Home() {
                 <p>{post.content}</p>
                 <Link href={`/blog/${post.id}`}>詳細</Link>
               </div>
-              <div className="flex">
-                <p>
-                  <a href="#">Author</a>
-                </p>
-                <p>a min ago</p>
-              </div>
-              <p>{post.content}</p>
-              <Link href={`/blog/${post.id}`}>詳細</Link>
-              </>
             ))}
           </div>
         </div>
